@@ -61,17 +61,17 @@ public class PullToRefreshView: UIView {
         self.backgroundView.autoresizingMask = UIViewAutoresizing.FlexibleWidth
         self.addSubview(backgroundView)
         
-        self.arrow = UIImageView(frame: CGRectMake(0, 0, 30, 30))
-        self.arrow.autoresizingMask = [.FlexibleLeftMargin, .FlexibleRightMargin]
-        
-        if let image = UIImage(named: options.imageName, inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil) {
-            self.arrow.image = image
-        } else {
-            self.arrow.image = UIImage(named: options.imageName)
+        var customImage: UIImage? = UIImage(named: options.imageName, inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)
+        if customImage == nil {
+            customImage = UIImage(named: options.imageName)
         }
         
-        
-        self.addSubview(arrow)
+        if let image = customImage {
+            self.arrow = UIImageView(frame: CGRect(origin: CGPoint.zero, size: image.size))
+            self.arrow.autoresizingMask = [.FlexibleLeftMargin, .FlexibleRightMargin]
+            self.arrow.image = image
+            self.addSubview(arrow)
+        }
         
         self.indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         self.indicator.bounds = self.arrow.bounds

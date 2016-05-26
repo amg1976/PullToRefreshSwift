@@ -50,7 +50,7 @@ public class PullToRefreshView: UIView {
             case .Stop:
                 stopAnimating()
             case .Finish:
-                var duration = options.animationDuration
+                var duration = PullToRefreshConst.animationDuration
                 var time = dispatch_time(DISPATCH_TIME_NOW, Int64(duration * Double(NSEC_PER_SEC)))
                 dispatch_after(time, dispatch_get_main_queue()) {
                     self.stopAnimating()
@@ -90,7 +90,7 @@ public class PullToRefreshView: UIView {
         self.arrow = UIImageView(frame: CGRectMake(0, 0, 30, 30))
         self.arrow.autoresizingMask = [.FlexibleLeftMargin, .FlexibleRightMargin]
         
-        self.arrow.image = UIImage(named: options.imageName, inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)
+        self.arrow.image = UIImage(named: PullToRefreshConst.imageName, inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)
         
         
         self.indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
@@ -160,7 +160,7 @@ public class PullToRefreshView: UIView {
         let offsetY = scrollView.contentOffset.y
         
         // Alpha set
-        if options.alpha {
+        if PullToRefreshConst.alpha {
             var alpha = fabs(offsetY) / (self.frame.size.height + 40)
             if alpha > 0.8 {
                 alpha = 0.8
@@ -227,7 +227,7 @@ public class PullToRefreshView: UIView {
             insets.bottom += self.frame.size.height
         }
         scrollView.bounces = false
-        UIView.animateWithDuration(options.animationDuration,
+        UIView.animateWithDuration(PullToRefreshConst.animationDuration,
                                    delay: 0,
                                    options:[],
                                    animations: {
@@ -251,7 +251,7 @@ public class PullToRefreshView: UIView {
             return
         }
         scrollView.bounces = self.scrollViewBounces
-        let duration = options.animationDuration
+        let duration = PullToRefreshConst.animationDuration
         UIView.animateWithDuration(duration,
                                    animations: {
                                     scrollView.contentInset = self.scrollViewInsets

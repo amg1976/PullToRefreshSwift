@@ -64,7 +64,7 @@ public class PullToRefreshView: UIView {
         self.arrow = UIImageView(frame: CGRectMake(0, 0, 30, 30))
         self.arrow.autoresizingMask = [.FlexibleLeftMargin, .FlexibleRightMargin]
         
-        self.arrow.image = UIImage(named: PullToRefreshConst.imageName, inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)
+        self.arrow.image = UIImage(named: options.imageName, inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)
         self.addSubview(arrow)
         
         self.indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
@@ -119,7 +119,7 @@ public class PullToRefreshView: UIView {
                 }
                 
                 // Alpha set
-                if PullToRefreshConst.alpha {
+                if options.alpha {
                     var alpha = fabs(offsetWithoutInsets) / (self.frame.size.height + 30)
                     if alpha > 0.8 {
                         alpha = 0.8
@@ -174,7 +174,7 @@ public class PullToRefreshView: UIView {
             insets.top += self.frame.size.height
             scrollView.contentOffset.y = self.previousOffset
             scrollView.bounces = false
-            UIView.animateWithDuration(PullToRefreshConst.animationDuration, delay: 0, options:[], animations: {
+            UIView.animateWithDuration(options.animationDuration, delay: 0, options:[], animations: {
                 scrollView.contentInset = insets
                 scrollView.contentOffset = CGPointMake(scrollView.contentOffset.x, -insets.top)
                 }, completion: {finished in
@@ -196,7 +196,7 @@ public class PullToRefreshView: UIView {
         
         if let scrollView = superview as? UIScrollView {
             scrollView.bounces = self.scrollViewBounces
-            UIView.animateWithDuration(PullToRefreshConst.animationDuration, animations: { () -> Void in
+            UIView.animateWithDuration(options.animationDuration, animations: { () -> Void in
                 scrollView.contentInset = self.scrollViewInsets
                 }) { (Bool) -> Void in
                     
